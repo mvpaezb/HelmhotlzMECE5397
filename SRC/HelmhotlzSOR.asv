@@ -2,17 +2,14 @@
 %Maria Violeta Paez 
 %Project A - Helmholtz Equation
 %Helmholtz Equation using Over-Relaxation Method
-
 clc
 clear all 
-
 %Ghost nodes, made as input in order to manipulate the code
 n=input('Enter your value for n= ')
-
 %Given values, constants
 gamma=-1; ax=-pi; ay=-pi; by=pi; bx=pi;
-b=1.5; %Betta, for over relaxation 
-
+%Betta, for over relaxation 
+b=1.5;
 %Creating vector with linespace function
 x=linspace(ax,bx,n); y=linspace(ay,by,n);
 
@@ -24,7 +21,7 @@ u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((b
 u(1,:)=x(:).*(x(:)-ax).^2;
 u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
 
-h=bx/n; %Step Size 
+h=length(x)/n; %Step Size 
 it=1000;
 
 for k=1:it
