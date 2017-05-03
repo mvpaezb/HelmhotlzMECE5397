@@ -26,6 +26,7 @@ for  j=2:n-1
         %Discritization, utilzing betta for over-relaxation
         u(i,j)= 1.*b/(4).*(u(i-1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2)+(1-b).*u(i,j);
     end 
+     u(j,1)= 1/(4).*(u(i+1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
 end
 unew=u;
 err=abs((uold-unew)./unew);
@@ -44,7 +45,7 @@ xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 title('SOR for Helmhotlz')
 figure
-surf(x,y,u)
+surf(x,y,u,'EdgeColor','none')
 xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 zlabel('Position U','fontSize',12);

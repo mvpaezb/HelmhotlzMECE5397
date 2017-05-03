@@ -19,7 +19,7 @@ x=linspace(ax,bx,n); y=linspace(ay,by,n);
 %Boundary conditions
 u=zeros(n); %Intial guess for Guass-Seidel
             %Method is zero for all interior nodes
-u(:,1)=ax;
+%u(:,1)=ax;
 u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((bx-ax).^2.*cos((pi.*bx)./ax)));
 u(1,:)=x(:).*(x(:)-ax).^2;
 u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
@@ -75,6 +75,7 @@ for  j=2:n-1
         %Discritization, utilzing betta for over-relaxation
         u(i,j)= 1.*b/(4).*(u(i-1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2)+(1-b).*u(i,j);
     end 
+     u(j,1)= 1/(4).*(u(i+1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
 end
 unew=u;
 err=abs((uold-unew)./unew);
@@ -93,7 +94,7 @@ xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 title('SOR for Helmhotlz')
 figure
-surf(x,y,u)
+surf(x,y,u,'EdgeColor','none')
 xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 zlabel('Position U','fontSize',12);

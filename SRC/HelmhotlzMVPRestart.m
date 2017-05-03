@@ -45,7 +45,7 @@ xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 title('Gauss Seidel for Helmhotlz')
 figure
-surf(x,y,u)
+surf(x,y,u,'EdgeColor','none')
 xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 zlabel('Position U','fontSize',12);

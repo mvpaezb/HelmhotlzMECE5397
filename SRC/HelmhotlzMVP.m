@@ -6,6 +6,7 @@
 clc
 clear all 
 
+%% 
 %Ghost nodes, made as input in order to manipulate the code
 n=input('Enter your value for n= ')
 
@@ -18,7 +19,7 @@ x=linspace(ax,bx,n); y=linspace(ay,by,n);
 
 %Boundary conditions
 u=zeros(n);
-u(:,1)=ax;
+% u(:,1)=ax;
 u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((bx-ax).^2.*cos((pi.*bx)./ax)));
 u(1,:)=x(:).*(x(:)-ax).^2;
 u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
@@ -57,7 +58,7 @@ while max(max(err(:)))>=1e-6  %Tolerance
     % If you want to test the restart script, use the function pause(1) to slow down the while loop.
     % This will slow down the while loop to 1 sec per iteration so that ctrl + C can used be to
     % "kill" the code to simulate a computer crash. From there, use the restart script to restart the loop.  
-    pause(.05)
+%     pause(.05)
     if mod(iter, frequency) == 0 % If statement, checkpoints periodically (determined by the frequency)
         chkpt                    % chkpt script performs checkpointing (save) every *frequency* iterations
         fprintf(1, ['Checkpointing frequency is every %2d iterations.' ...
@@ -74,7 +75,7 @@ for  j=2:n-1
         %Discritization 
         u(i,j)= 1/(4).*(u(i-1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
     end 
-    u(i,n)= 1/(4).*(u(i-1,j)+u(i-1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
+    u(j,1)= 1/(4).*(u(i+1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
 end
 unew=u;
 err=abs((uold-unew)./unew);
@@ -90,7 +91,7 @@ xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 title('Gauss Seidel for Helmhotlz')
 figure
-surf(x,y,u)
+surf(x,y,u,'EdgeColor','none')
 xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 zlabel('Position U','fontSize',12);
