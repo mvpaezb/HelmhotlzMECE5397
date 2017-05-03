@@ -83,7 +83,7 @@ err=abs((uold-unew)./unew);
 end
 timedoc=toc
 
-%Plot
+%% Plot
 figure
 contourf(u)
 colorbar('location','eastoutside','fontSize',12);

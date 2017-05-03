@@ -85,7 +85,7 @@ end
 timedoc=toc
 
 
-%Plot
+%% Plot
 
 figure
 contourf(u)
