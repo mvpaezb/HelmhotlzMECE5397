@@ -25,8 +25,11 @@ u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
 
 h=bx/n; %Step Size 
 it=1000;
+err=1;
 
-for k=1:it
+while max(max(err(:)))>=1e-6
+    uold=u;
+   
 for  j=2:n-1
     for i=2:n-1
         F(i,j)=sin(pi.*((x(i)-ax)/(bx-ax))).*cos((pi/2).*(2.*(((y(j)-ay)/(by-ay))+1)));
@@ -35,6 +38,9 @@ for  j=2:n-1
     end 
     u(i,n)= 1/(4).*(u(i-1,j)+u(i-1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
 end
+unew=u;
+err=abs((uold-unew)./unew);
+
 end
 %Plot 
 
