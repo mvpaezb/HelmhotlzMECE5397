@@ -11,11 +11,4 @@ x=linspace(ax,bx,n); y=linspace(ay,by,n);
 %Boundary conditions
 u=zeros(n);
 u(:,1)=ax;
-u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((bx-ax).^2.*cos((pi.*bx)./ax)));
-u(1,:)=x(:).*(x(:)-ax).^2;
-u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
-
-
-
-
-surf(x,y,u)
+u(:,n)=
