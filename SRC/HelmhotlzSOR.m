@@ -6,6 +6,7 @@ clear all
 n=input('Enter your value for n= ')
 %Given values, constants
 gamma=-1; ax=-pi; ay=-pi; by=pi; bx=pi;
+b=1.5;
 %Creating vector with linespace function
 x=linspace(ax,bx,n); y=linspace(ay,by,n);
 %Boundary conditions
@@ -22,7 +23,7 @@ for  j=2:n-1
     for i=2:n-1
         F(i,j)=sin(pi.*((x(i)-ax)/(bx-ax))).*cos((pi/2).*(2.*(((y(j)-ay)/(by-ay))+1)));
         %Discritization 
-        u(i,j)= 1/(4).*(u(i-1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
+        u(i,j)= 1.*b/(4).*(u(i-1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2)+(1-b).*u(i,j);
     end 
 end
 end
@@ -33,10 +34,10 @@ contourf(u)
 colorbar('location','eastoutside','fontSize',12);
 xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
-title('Gauss Seidel for Helmhotlz')
+title('SOR for Helmhotlz')
 figure
 surf(x,y,u)
 xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 zlabel('Position U','fontSize',12);
-title('Gauss Seidel for Helmhotlz');
+title('SOR for Helmhotlz');
