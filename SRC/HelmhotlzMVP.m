@@ -12,7 +12,7 @@ n=input('Enter your value for n= ')
 
 %Given values, constants
 
-gamma=-1; ax=-pi; ay=-pi; by=pi; bx=pi;
+gamma=1; ax=-pi; ay=-pi; by=pi; bx=pi;
 
 %Creating vector with linespace function
 x=linspace(ax,bx,n); y=linspace(ay,by,n);
@@ -75,7 +75,7 @@ for  j=2:n-1
         %Discritization 
         u(i,j)= (1/((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j-1)));
     end 
-    u(i,j)= (1/((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)));
+    u(j,1)= (1/((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)));
 end
 unew=u;
 err=abs((uold-unew)./unew);
