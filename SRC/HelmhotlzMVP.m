@@ -12,14 +12,14 @@ n=input('Enter your value for n= ')
 
 %Given values, constants
 
-gamma=1; ax=-pi; ay=-pi; by=pi; bx=pi;
+gamma=-1; ax=-pi; ay=-pi; by=pi; bx=pi;
 
 %Creating vector with linespace function
 x=linspace(ax,bx,n); y=linspace(ay,by,n);
 
 %Boundary conditions
 u=zeros(n);
-% u(:,1)=ax;
+% u(:,1)=ax; %(You can find it as a code in line 76)
 u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((bx-ax).^2.*cos((pi.*bx)./ax)));
 u(1,:)=x(:).*(x(:)-ax).^2;
 u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
@@ -58,7 +58,7 @@ while max(max(err(:)))>=1e-6  %Tolerance
     % If you want to test the restart script, use the function pause(1) to slow down the while loop.
     % This will slow down the while loop to 1 sec per iteration so that ctrl + C can used be to
     % "kill" the code to simulate a computer crash. From there, use the restart script to restart the loop.  
-%     pause(.05)
+    %pause(.05) Only used to with small values of n, to play w/ restart code
     if mod(iter, frequency) == 0 % If statement, checkpoints periodically (determined by the frequency)
         chkpt                    % chkpt script performs checkpointing (save) every *frequency* iterations
         fprintf(1, ['Checkpointing frequency is every %2d iterations.' ...
@@ -75,7 +75,7 @@ for  j=2:n-1
         %Discritization 
         u(i,j)= (1/((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j-1)));
     end 
-    u(j,1)= (1/((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)));
+    u(j,1)= (1/((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1))); %This is the boundary conditions.
 end
 unew=u;
 err=abs((uold-unew)./unew);
