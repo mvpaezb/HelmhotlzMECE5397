@@ -19,6 +19,7 @@ x=linspace(ax,bx,n); y=linspace(ay,by,n);
 
 %Boundary conditions
 u=zeros(n);
+%B.C. are vectorized to optimize the code
 % u(:,1)=ax; %(You can find it as a code in line 76)
 u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((bx-ax).^2.*cos((pi.*bx)./ax)));
 u(1,:)=x(:).*(x(:)-ax).^2;

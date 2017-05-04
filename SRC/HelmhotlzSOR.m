@@ -20,6 +20,7 @@ x=linspace(ax,bx,n); y=linspace(ay,by,n);
 u=zeros(n); %Intial guess for Guass-Seidel
             %Method is zero for all interior nodes
 %u(:,1)=ax;
+%B.C. are vectorized to optimize the code
 u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((bx-ax).^2.*cos((pi.*bx)./ax)));
 u(1,:)=x(:).*(x(:)-ax).^2;
 u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
