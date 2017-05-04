@@ -10,7 +10,7 @@ clear all
 n=input('Enter your value for n= ')
 
 %Given values, constants
-gamma=-1; ax=-pi; ay=-pi; by=pi; bx=pi;
+gamma=0; ax=-pi; ay=-pi; by=pi; bx=pi;
 b=1.5; %Betta, for over relaxation 
 
 %Creating vector with linespace function
@@ -71,9 +71,9 @@ while max(max(err(:)))>=1e-6  %Tolerance
    
 for  j=2:n-1
     for i=2:n-1
-        F(i,j)=sin(pi.*((x(i)-ax)/(bx-ax))).*cos((pi/2).*(2.*(((y(j)-ay)/(by-ay))+1)));
+  %F(i,j)=sin(pi.*((x(i)-ax)/(bx-ax))).*cos((pi/2).*(2.*(((y(j)-ay)/(by-ay))+1)));
         %Discritization, utilzing betta for over-relaxation
-       
+    F(i,j)=0;   
         u(i,j)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j));
     end 
     
