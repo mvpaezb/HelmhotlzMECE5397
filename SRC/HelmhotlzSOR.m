@@ -73,9 +73,11 @@ for  j=2:n-1
     for i=2:n-1
         F(i,j)=sin(pi.*((x(i)-ax)/(bx-ax))).*cos((pi/2).*(2.*(((y(j)-ay)/(by-ay))+1)));
         %Discritization, utilzing betta for over-relaxation
-       u(i,j)= 1.*b/(4).*(u(i-1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2)+(1-b).*u(i,j);
+       
+        u(i,j)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j));
     end 
-    u(j,1)= 1/(4).*(u(i+1,j)+u(i+1,j)+u(i,j-1)+u(i,j+1)+F(i,j).*h.^2);
+    
+      u(j,1)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j)); %This is the boundary conditions. %This is the boundary conditions.
 end
 unew=u;
 err=abs((uold-unew)./unew);
@@ -94,7 +96,7 @@ xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 title('SOR for Helmhotlz')
 figure
-surf(x,y,u,'EdgeColor','none')
+mesh(x,y,u)
 xlabel('X Number of Nodes in X-direction','fontSize',12);
 ylabel('Y Number of Nodes in Y-direction','fontSize',12);
 zlabel('Position U','fontSize',12);
