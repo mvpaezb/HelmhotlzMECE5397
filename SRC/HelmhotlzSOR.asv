@@ -20,6 +20,7 @@ x=linspace(ax,bx,n); y=linspace(ay,by,n);
 u=zeros(n); %Intial guess for Guass-Seidel
             %Method is zero for all interior nodes
 %u(:,1)=ax;
+%B.C. are vectorized to optimize the code
 u(:,n)=((bx-ax).^2.*cos((pi.*bx)./ax))+((y(:)-ay)./(by-ay)).*(bx.*(bx-ax).^2-((bx-ax).^2.*cos((pi.*bx)./ax)));
 u(1,:)=x(:).*(x(:)-ax).^2;
 u(n,:)=(x(:)-ax).^2.*cos(pi.*x(:)./ax);
@@ -71,13 +72,13 @@ while max(max(err(:)))>=1e-6  %Tolerance
    
 for  j=2:n-1
     for i=2:n-1
-  %F(i,j)=sin(pi.*((x(i)-ax)/(bx-ax))).*cos((pi/2).*(2.*(((y(j)-ay)/(by-ay))+1)));
+  F(i,j)=sin(pi.*((x(i)-ax)/(bx-ax))).*cos((pi/2).*(2.*(((y(j)-ay)/(by-ay))+1)));
         %Discritization, utilzing betta for over-relaxation
-    F(i,j)=0   
+   % F(i,j)=0;   
         u(i,j)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j));
     end 
-    
-      u(j,1)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j)); %This is the boundary conditions. %This is the boundary conditions.
+    k=
+      u(k,1)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j)); %This is the boundary conditions.
 end
 unew=u;
 err=abs((uold-unew)./unew);

@@ -77,8 +77,8 @@ for  j=2:n-1
    % F(i,j)=0;   
         u(i,j)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i-1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j));
     end 
-    
-      u(j,1)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j-1)))+((1-b).*u(i,j)); %This is the boundary conditions.
+    k=j; i=j; j=1;
+      u(k,1)= (b./((gamma*h^2)-4))*((h^2)*F(i,j)-(u(i+1,j)+u(i+1,j)+u(i,j+1)+u(i,j+1)))+((1-b).*u(i,j)); %This is the boundary conditions.
 end
 unew=u;
 err=abs((uold-unew)./unew);
